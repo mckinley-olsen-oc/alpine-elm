@@ -1,4 +1,4 @@
-FROM alpine:3.6
+FROM frolvlad/alpine-glibc
 
 RUN mkdir /elm
 WORKDIR /elm
@@ -10,5 +10,8 @@ RUN apk update && \
     tar xvzf linux-x64.tar.gz
 
 ENV PATH="/elm/dist_binaries:${PATH}"
+
+RUN wget https://raw.githubusercontent.com/elm-lang/elm-lang.org/master/src/examples/hello-world.elm && \
+    elm-make --yes hello-world.elm
 
 CMD ["/bin/sh"]
